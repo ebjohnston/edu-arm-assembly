@@ -8,6 +8,13 @@
 ;   This program takes two separate strings as input and combines them character-by-
 ;       character to form a new string. The input strings are located at StrOne and
 ;       StrTwo and the combined string is stored in MixStr.
+
+;   Inputs: two null-terminated strings of ASCII characters
+;       - stored in DATA as StrOne and StrTwo
+
+;   Output: a single combined ASCII string of at most length MAX_LEN (DATA)
+;       - stored in DATA as MixStr
+
 ;   Registers Used:
 ;       R0 - buffer used to store each character as it is processed
 ;       R1 - memory address of the next character to be processed in StrOne
@@ -16,9 +23,10 @@
 
 
     AREA    StringCombination, CODE, READONLY
+    EXPORT  main                    ;   required by the startup code
     ENTRY
 
-Main
+main
     LDR     R1, =StrOne             ;   [R1] <-- the address StrOne
     LDR     R2, =StrTwo             ;   [R2] <-- the address StrTwo
     LDR     R3, =MixStr             ;   [R2] <-- the address MixStr
@@ -68,22 +76,23 @@ DONE_StrTwo
 
 DONE_Both
     STRB    R0, [R3]                ;   ensures the combined string ends in null
-    SWI     0x11                    ;   terminate program
+
+DONE
+    MOV    R0, #0x18                ;   angel_SWIreason_ReportException
+    LDR    R1, =0x20026             ;   ADP_Stopped_ApplicationExit
+    SVC    #0x11                    ;   previously SWI
+;   BKPT   #0xAB                    ;   for semihosting - isn't supported in Keil's uV
 
 
     AREA    Data, DATA
 
-MAX_LEN     EQU 250                 ;   maximum character length of combined string
+MAX_LEN    EQU 250                  ;   maximum character length of combined string
 
+StrOne     DCB "Hello World", 0             ;   first string to be combined
 
-StrOne                              ;   first string to be combined
-    DCB "Hello World", 0
+StrTwo     DCB "To be or not to be", 0      ;   second string to be combined
 
-StrTwo                              ;   second string to be combined
-    DCB "To be or not to be", 0
-
-MixStr                              ;   reserved memory for the combined string
-    % 251
+MixStr     % 251                    ;   reserved space for output
 
 
     END

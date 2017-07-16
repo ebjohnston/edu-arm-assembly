@@ -11,11 +11,11 @@
 ;       contents of the difference of "b - a" into RESULT
 
 ;   Inputs: a negative integer "a" and a positive integer "b"
-;       The hexadecimal digits of a are contained within A_MSD and A_LSD
-;       The hexadecimal digits of b are contained within B_MSD and B_LSD
+;       - the hexadecimal digits of a are stored in DATA as A_MSD and A_LSD
+;       - the hexadecimal digits of b are stored in DATA as B_MSD and B_LSD
 
 ;   Output: a two's complement representation of the hexadecimal difference "b-a"
-;       This value is stored in the reserved memory space RESULT
+;       - stored in DATA as RESULT
 
 ;   Registers Used:
 ;       R0 - memory address of most significant digit (MSD) of current input
