@@ -5,3 +5,4 @@ university assignments in ARM language (CS 2400 and 3750)
 - [ ] convert all assembly to Keil uVision standard for consistency
 - [ ] provide documentation about each assignment
 - [ ] update comments and style for consistency
+    - [ ] fix indentation and convert tabs to spaces

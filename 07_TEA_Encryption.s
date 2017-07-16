@@ -8,9 +8,9 @@
 ;   This program encrypts some plaintext input using a single pair of rounds of
 ;   a Tiny Encryption Algorithm (TEA), yielding a ciphertext output
 
-	AREA	TEA_Encryption, CODE, READONLY
-	EXPORT	main                    ;   required by the startup code
-	ENTRY
+    AREA    TEA_Encryption, CODE, READONLY
+    EXPORT    main                  ;   required by the startup code
+    ENTRY
 
 main
     LDR R12, =RZero                 ;   [R12] <-- address of RZero
@@ -72,13 +72,13 @@ main
     STR R1, [R2]                    ;   stores L2 in memory at LTwo
 
 done
-	MOV		R0, #0x18               ;   angel_SWIreason_ReportException
-	LDR		R1, =0x20026            ;   ADP_Stopped_ApplicationExit
-	SVC		#0x11                   ;   previously SWI
+    MOV        R0, #0x18            ;   angel_SWIreason_ReportException
+    LDR        R1, =0x20026         ;   ADP_Stopped_ApplicationExit
+    SVC        #0x11                ;   previously SWI
 ;   BKPT    #0xAB                   ;   for semihosting - isn't supported in Keil's uV
 
 
-    AREA	Data, DATA, READWRITE
+    AREA    Data, DATA, READWRITE
     EXPORT adrLTwo
     EXPORT adrRTwo
 
@@ -86,9 +86,9 @@ adrLTwo         DCD LTwo
 adrRTwo         DCD RTwo
 
 DeltaOne                            ;   the first delta offset used for encryption
-    DCD	0x11111111
+    DCD    0x11111111
 DeltaTwo                            ;   the second delta offset used for encryption
-    DCD	0x22222222
+    DCD    0x22222222
 
 KZero                               ;   the first key used for encryption
     DCD 0x90001C55
