@@ -78,21 +78,21 @@ DONE_Both
     STRB    R0, [R3]                ;   ensures the combined string ends in null
 
 DONE
-    MOV    R0, #0x18                ;   angel_SWIreason_ReportException
-    LDR    R1, =0x20026             ;   ADP_Stopped_ApplicationExit
-    SVC    #0x11                    ;   previously SWI
-;   BKPT   #0xAB                    ;   for semihosting - isn't supported in Keil's uV
+    MOV     R0, #0x18               ;   angel_SWIreason_ReportException
+    LDR     R1, =0x20026            ;   ADP_Stopped_ApplicationExit
+    SVC     #0x11                   ;   previously SWI
+;   BKPT    #0xAB                   ;   for semihosting - isn't supported in Keil's uV
 
 
     AREA    Data, DATA
 
-MAX_LEN    EQU 250                  ;   maximum character length of combined string
+MAX_LEN     EQU 250                 ;   maximum character length of combined string
 
-StrOne     DCB "Hello World", 0             ;   first string to be combined
+StrOne      DCB "Hello World", 0            ;   first string to be combined
 
-StrTwo     DCB "To be or not to be", 0      ;   second string to be combined
+StrTwo      DCB "To be or not to be", 0     ;   second string to be combined
 
-MixStr     % 251                    ;   reserved space for output
+MixStr      %   251                 ;   reserved space for output
 
 
     END

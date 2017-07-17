@@ -52,10 +52,10 @@ main
     STR     R6, [R7]                ;   {RESULT} <-- [R6]
 
 DONE
-    MOV    R0, #0x18                ;   angel_SWIreason_ReportException
-    LDR    R1, =0x20026             ;   ADP_Stopped_ApplicationExit
-    SVC    #0x11                    ;   previously SWI
-;   BKPT   #0xAB                    ;   for semihosting - isn't supported in Keil's uV
+    MOV     R0, #0x18               ;   angel_SWIreason_ReportException
+    LDR     R1, =0x20026            ;   ADP_Stopped_ApplicationExit
+    SVC     #0x11                   ;   previously SWI
+;   BKPT    #0xAB                   ;   for semihosting - isn't supported in Keil's uV
 
 
 ;   Hexadecimal to Binary Subroutine
@@ -104,22 +104,22 @@ DONE_Hex2Bin
 
     AREA    Data, DATA
 
-A_MSD       DCB    0xA              ;   a's Most Significant Digit
-            DCB    0x0
-            DCB    0x5
-            DCB    0xE
-            DCB    0x6
-A_LSD       DCB    0x5              ;   a's Least Significant Digit
+A_MSD       DCB 0xA                 ;   a's Most Significant Digit
+            DCB 0x0
+            DCB 0x5
+            DCB 0xE
+            DCB 0x6
+A_LSD       DCB 0x5                 ;   a's Least Significant Digit
             ALIGN
 
-B_MSD       DCB    0xF              ;   b's Most Significant Digit
-            DCB    0xA
-            DCB    0x2
-            DCB    0x4
-            DCB    0x8
-            DCB    0xB
-            DCB    0x6
-B_LSD       DCB    0xE              ;   b's Least Significant Digit
+B_MSD       DCB 0xF                 ;   b's Most Significant Digit
+            DCB 0xA
+            DCB 0x2
+            DCB 0x4
+            DCB 0x8
+            DCB 0xB
+            DCB 0x6
+B_LSD       DCB 0xE                 ;   b's Least Significant Digit
             ALIGN
 
 RESULT      DCD 0x0                 ;   ASCII code of '-' if negative
