@@ -42,7 +42,7 @@ LOOP_Main
     BEQ     DONE_StrTwo             ;   next character is null - process StrOne
     STRB    R0, [R3], #1            ;   transfer the character from the buffer to MixStr
 
-    B       LOOP_Main               ;   return to LOOP_Main
+    B       LOOP_Main               ;   continue looping indefinitely
 
 
 ;   String One Finished Loop
@@ -81,18 +81,22 @@ DONE
     MOV     R0, #0x18               ;   angel_SWIreason_ReportException
     LDR     R1, =0x20026            ;   ADP_Stopped_ApplicationExit
     SVC     #0x11                   ;   previously SWI
-;   BKPT    #0xAB                   ;   for semihosting - isn't supported in Keil's uV
 
 
     AREA    Data, DATA
 
-MAX_LEN     EQU 250                 ;   maximum character length of combined string
+    EXPORT  ADDR_MixStr
+
+ADDR_MixStr
+    DCD     MixStr
+
+MAX_LEN     EQU 250                         ;   maximum character length of combined string
 
 StrOne      DCB "Hello World", 0            ;   first string to be combined
 
 StrTwo      DCB "To be or not to be", 0     ;   second string to be combined
 
-MixStr      %   251                 ;   reserved space for output
+MixStr      %   251                         ;   reserved space for output
 
 
     END

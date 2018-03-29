@@ -8,14 +8,14 @@
 ;   This program converts two hexadecimal numbers into their appropriate
 ;       two's complement and then adds them together with the first operand
 ;       being negative and the second operand being positive, storing the
-;       contents of the difference of "b - a" into RESULT
+;       contents of the difference of "b - a" into Result
 
 ;   Inputs: a negative integer "a" and a positive integer "b"
 ;       - the hexadecimal digits of a are stored in DATA as A_MSD and A_LSD
 ;       - the hexadecimal digits of b are stored in DATA as B_MSD and B_LSD
 
 ;   Output: a two's complement representation of the hexadecimal difference "b-a"
-;       - stored in DATA as RESULT
+;       - stored in DATA as Result
 
 ;   Registers Used:
 ;       R0 - memory address of most significant digit (MSD) of current input
@@ -24,7 +24,7 @@
 ;       R3 - buffer to store individal digits of input
 ;       R4 - two's complement representation of "-a"
 ;       R5 - two's complement representation of "b"
-;       R6 - memory address of RESULT, where difference is stored
+;       R6 - memory address of Result, where difference is stored
 ;       R7 - two's complement representation of "b - a"
 ;       R8 - loop iteration counter for HexToBin
 
@@ -46,16 +46,15 @@ main
     BL      Hex2Bin
     MOV     R5, R2                  ;   [R5] <-- b's two's complement
 
-    ;   third, store two's complement of "b - a" in RESULT
+    ;   third, store two's complement of "b - a" in Result
     ADD     R6, R4, R5              ;   [R6] <-- (b - a)'s two's complement
-    LDR     R7, =RESULT
-    STR     R6, [R7]                ;   {RESULT} <-- [R6]
+    LDR     R7, =Result
+    STR     R6, [R7]                ;   {Result} <-- [R6]
 
 DONE
     MOV     R0, #0x18               ;   angel_SWIreason_ReportException
     LDR     R1, =0x20026            ;   ADP_Stopped_ApplicationExit
     SVC     #0x11                   ;   previously SWI
-;   BKPT    #0xAB                   ;   for semihosting - isn't supported in Keil's uV
 
 
 ;   Hexadecimal to Binary Subroutine
@@ -69,7 +68,7 @@ DONE
 ;   Buffers:    R3, R8
 
 Hex2Bin
-    MOV     R2, #0                  ;   clear result register
+    MOV     R2, #0                  ;   clear output register
     MOV     R8, #1                  ;   initialize loop counter
 
 LOOP_Hex2Bin
@@ -104,6 +103,8 @@ DONE_Hex2Bin
 
     AREA    Data, DATA
 
+    EXPORT  Result
+
 A_MSD       DCB 0xA                 ;   a's Most Significant Digit
             DCB 0x0
             DCB 0x5
@@ -122,7 +123,7 @@ B_MSD       DCB 0xF                 ;   b's Most Significant Digit
 B_LSD       DCB 0xE                 ;   b's Least Significant Digit
             ALIGN
 
-RESULT      DCD 0x0                 ;   ASCII code of '-' if negative
+Result      DCD 0x0                 ;   ASCII code of '-' if negative
 
 
     END
