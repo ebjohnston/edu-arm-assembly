@@ -23,7 +23,7 @@
     ENTRY
 
 main
-    LDR     R1, =intArray           ;   [R1] <-- the address intArray
+    LDR     R1, =IntArray           ;   [R1] <-- the address IntArray
     MOV     R2, #0x0                ;   [R2] <-- 0
     MOV     R3, #0x0                ;   [R3] <-- 0
     MOV     R4, #0x0                ;   [R4] <-- 0
@@ -84,7 +84,7 @@ ADDR_Sum
     DCD     Sum
 
 
-intArray                            ;   array of 10 signed 32-bit integers
+IntArray                            ;   array of up to 10 signed 32-bit integers
     DCD 50, -125, 465, 232, 101, 145, 54, 25, -20
 
 Counter                             ;   number of values in summation

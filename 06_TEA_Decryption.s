@@ -79,13 +79,8 @@ DONE
 
     AREA    Data, DATA, READWRITE
 
-    EXPORT ADDR_LZero
-    EXPORT ADDR_RZero
-
-ADDR_LZero
-    DCD     LZero
-ADDR_RZero
-    DCD     RZero
+    EXPORT LZero
+    EXPORT RZero
 
 DeltaOne                            ;   the first delta offset used in the decryption
     DCD     0x11111111

@@ -29,14 +29,14 @@
 main
     MOV     R1, #0x0                ;   [R1] <-- 0
     MOV     R5, #0x0                ;   [R5] <-- 0
-    LDR     R6, =Input              ;   [R0] <-- the address Input
+    LDR     R6, =HexStr              ;   [R0] <-- the address HexStr
 
 LOOP_Input
     CMP     R5, #8                  ;   are there more than eight inputs ([R5] >= 8)?
     BGE     DONE_Input              ;   more than eight digits - stop reading
 
 NumCheck
-    LDRB    R0, [R6], #1            ;   Load a byte from Input to R0
+    LDRB    R0, [R6], #1            ;   Load a byte from HexStr to R0
 
     CMP     R0, #'0'                ;   is the input >= ASCII 0?
     BLT     DONE_Input              ;   input is < ASCII 0 - out of range
@@ -160,7 +160,7 @@ DIV_HextoDec
 ADDR_DecStr
     DCD     DecStr
 
-Input
+HexStr
     DCB     "3F0D5A", 0             ;   input string of Hexadecimal to be converted
 
 TwosComp

@@ -79,13 +79,8 @@ DONE
 
     AREA    Data, DATA, READWRITE
 
-    EXPORT ADDR_LTwo
-    EXPORT ADDR_RTwo
-
-ADDR_LTwo
-    DCD     LTwo
-ADDR_RTwo
-    DCD     RTwo
+    EXPORT LTwo
+    EXPORT RTwo
 
 DeltaOne                            ;   the first delta offset used for encryption
     DCD     0x11111111
